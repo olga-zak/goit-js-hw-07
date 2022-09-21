@@ -19,7 +19,21 @@ gallery.addEventListener('click', event => {
     if (event.target.nodeName !== 'IMG') {
         return;
       } 
-        const instance = basicLightbox.create(`<img src="${event.target.dataset.source}" width="800" height="600">`)
-        instance.show()   
+        const instance = basicLightbox.create(`<img src="${event.target.dataset.source}" width="800" height="600">`, {
+          //closable: true/false //Prevents the lightbox from closing when clicking its background
+          onShow: (instance) => {
+            document.addEventListener('keydown', closeOnEsc)},
+          onClose: (instance) => {
+            document.removeEventListener('keydown', closeOnEsc)},
+        })
+        instance.show() 
+          
+        function closeOnEsc (event) {
+          if (event.key !== 'Escape') {
+            return;
+          } 
+          instance.close() 
+         }      
 })
+
 

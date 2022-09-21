@@ -8,16 +8,16 @@ const markUp = galleryItems.map(({preview, original, description}) => `<a class=
 const galleryEl = document.querySelector('.gallery')
 galleryEl.insertAdjacentHTML('afterbegin', markUp)
 
+const lightbox = 
+       new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionDelay: 250,
+       });
+
 galleryEl.addEventListener('click', event => {
     event.preventDefault()
 
     if (event.target.nodeName !== 'IMG') {
         return;
-      } 
-       const lightbox = 
-       new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionDelay: 250,
-       });  
-      // lightbox.open()
+      }  
 })
